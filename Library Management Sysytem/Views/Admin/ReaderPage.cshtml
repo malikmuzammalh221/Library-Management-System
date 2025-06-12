@@ -1,0 +1,49 @@
+﻿@model List<Library_Management_Sysytem.Context.Reader>
+@{
+    ViewBag.Title = "ReaderPage";
+    Layout = "~/Views/Shared/_Admin-Layout.cshtml";
+}
+
+
+<div class="card mt-4">
+    <div class="card-header">
+        <a class="btn btn-primary float-end" href="@Url.Action("Index","Admin")">Back to Main</a>
+        <h2 class="">Issued List:@ViewBag.ReaderCount</h2>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th class="border">Student Name</th>
+                    <th class="border">Book Name</th>
+                    <th class="border">Roll No</th>
+                    <th class="border">Department</th>
+                    <th class="border">Start Date</th>
+                    <th class="border">End Date</th>
+                    <th class="border">Charges</th>
+                    <th class="border">Total Charges</th>
+                    <th class="border">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="border text-center">@item.Name</td>
+                        <td class="border text-center">@item.BName</td>
+                        <td class="border text-center">@item.RollNo</td>
+                        <td class="border text-center">@item.Department</td>
+                        <td class="border text-center">@item.StartDate</td>
+                        <td class="border text-center">@item.EndDate</td>
+                        <td class="border text-center">@item.ChargesPerDay</td>
+                        <td class="border text-center">@item.TotalCharges</td>
+                        <td class="border text-center">
+                            <a class="btn btn-danger" href="@Url.Action("DeleteReader", "Admin", new { ID = item.ReaderId })" onclick="return confirm('Are you sure you want to delete this Reader?');">Delete</a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

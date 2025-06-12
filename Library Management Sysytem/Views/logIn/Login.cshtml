@@ -1,0 +1,48 @@
+﻿@model Library_Management_Sysytem.Models.LogInViewModel
+@{
+    ViewBag.Title = "Login";
+}
+<style>
+    .hedcolr{
+        background-color:dodgerblue;
+    }
+</style>
+
+<div class="align-content-center justify-content-center d-flex">
+    <div class="m-5">
+        <div class="card">
+            <div class="card-header hedcolr">
+                <h3 class="text-center">Log In</h3>
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm("LogIn", "logIn", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <label>Username</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "", placeholder = "Username" } })
+                            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "", placeholder = "Password" } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group mt-2">
+                        <div class="row">
+                            <div class="col-7">
+                                <input type="submit" value="LogIn" class="btn btn-success" />
+                            </div>
+                            <div class="col-5">
+                                <a class="btn btn-primary" href="@Url.Action("Index","Home")">Back</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

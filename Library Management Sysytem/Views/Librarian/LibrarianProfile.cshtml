@@ -1,0 +1,51 @@
+﻿@model List<Library_Management_Sysytem.Context.Librarian>
+@{
+    ViewBag.Title = "LibrarianProfile";
+    Layout = "../Shared/_Librarian-Layout.cshtml";
+}
+<style>
+    .UpdatePen {
+        margin-top: -5px;
+        height: 20px;
+        width: 20px;
+    }
+</style>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success text-center">@TempData["SuccessMessage"]</div>
+            }
+            <div class="col-md-8">
+                <div class="card shadow-lg p-4">
+                    <div class="row align-items-center">
+                        @foreach (var item in Model)
+                        {
+                            <!-- Librarian Image -->
+                            <div class="col-md-4 text-center mb-3 mb-md-0">
+                                <img src="@item.ImgFile.Replace("~","")" alt="Librarian Image" class="img-fluid  shadow-sm" style="width: 170px; height: 170px; object-fit: cover;">
+                            </div>
+
+                            <!-- Librarian Details -->
+                            <div class="col-md-8">
+                                <h2 class="mb-2">@item.LiName</h2>
+                                <h5 class="text-muted mb-3">Librarian</h5>
+                                <ul class="list-unstyled mb-3">
+                                    <li><strong>Email:</strong>@item.Email</li>
+                                    <li><strong>Username:</strong>@item.Username</li>
+                                    <li><strong>Phone:</strong>@item.Phone</li>
+                                    <li><strong>Joining Date:</strong>@item.Date</li>
+                                </ul>
+                                <a href="@Url.Action("UpdateProfile", "Librarian", new {Id=item.IdLibrarian})" class="btn btn-primary mt-2"><img class="UpdatePen" src="~/Assets/images/Icon/pen-solid.svg"/> Edit Profile</a>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

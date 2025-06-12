@@ -1,0 +1,203 @@
+﻿@model List<Library_Management_Sysytem.Context.User>
+@{
+    ViewBag.Title = "StudentList";
+    Layout = "~/Views/Shared/_Librarian-Layout.cshtml";
+}
+<style>
+    .pagination-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-top: 20px;
+        flex-wrap: nowrap; /* Prevent wrapping */
+    }
+
+        .pagination-container .page-link {
+            padding: 8px 14px;
+            background-color: #007bff;
+            color: white;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+            .pagination-container .page-link:hover {
+                background-color: #0056b3;
+            }
+
+            .pagination-container .page-link.active {
+                background-color: #003d7a;
+                font-weight: bold;
+            }
+    .booksize {
+        margin-top: -5px;
+        height: 20px;
+        width: 20px;
+    }
+</style>
+
+
+<div class="card shadow">
+    <div class="card-header">
+        <a class="btn btn-primary float-end" href="@Url.Action("AddStudent","Librarian")">Add Student</a>
+    </div>
+    <div class="card-body">
+        <section class="mb-2">
+            <form class="row g-3 justify-content-center">
+                <div class="col-md-3">
+                    <div id="category">
+                        <input type="text" class="form-control" placeholder="Student Name" id="category" name="Name">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100" id="SearchButton">Search</button>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
+
+<div class="card mt-4" id="ResultStudent" style="display:none;">
+    <div class="card-body">
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th class="border">Picture</th>
+                    <th class="border">Name</th>
+                    <th class="border">Roll No</th>
+                    <th class="border">Department</th>
+                    <th class="border">Phone</th>
+                    <th class="border">Email</th>
+                    <th class="border">Username</th>
+                    <th class="border">Date</th>
+                    <th class="border">Action</th>
+                </tr>
+            </thead>
+            <tbody id="SearchStudent">
+            </tbody>
+        </table>
+    </div>
+</div>
+@if (TempData["AddSuccess"] != null)
+{
+    <div class="alert alert-success text-center">@TempData["AddSuccess"]</div>
+}
+@if (TempData["UpdateSuccessMessage"] != null)
+{
+    <div class="alert alert-success text-center">@TempData["UpdateSuccessMessage"]</div>
+}
+@*<div class="text-center">
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    
+    @TempData["AddSuccess"]
+</div>*@
+<div class="card mt-4" id="Student">
+    <div class="card-header">
+        <h2 class="">Student List:@ViewBag.count</h2>
+
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th class="border">Picture</th>
+                    <th class="border">Name</th>
+                    <th class="border">Roll No</th>
+                    <th class="border">Department</th>
+                    <th class="border">Phone</th>
+                    <th class="border">Email</th>
+                    <th class="border">Username</th>
+                    <th class="border">Date</th>
+                    <th class="border">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="border text-center"> <img style="height:40px; width:40px;" src="@item.ImgFile.Replace("~","")" /></td>
+                        <td class="border text-center">@item.Name</td>
+                        <td class="border text-center">@item.RollNo</td>
+                        <td class="border text-center">@item.Department</td>
+                        <td class="border text-center">@item.Phone</td>
+                        <td class="border text-center">@item.Email</td>
+                        <td class="border text-center">@item.Username</td>
+                        <td class="border text-center">@item.Date</td>
+                        <td class="border text-center">
+                            <a class="btn btn-success" href="@Url.Action("UpdateStudent","Librarian", new{ID = item.UId})"><img class="booksize" src="~/Assets/images/Icon/pen-solid.svg" /></a>
+                            <a class="btn btn-primary" href="@Url.Action("AddReader", "Librarian", new{ID = item.UId})"><img class="booksize" src="~/Assets/images/Icon/book-medical-solid.svg" /></a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+        <div class="pagination-container">
+            @if (ViewBag.CurrentPage > 1)
+            {
+                <a class="page-link btn" href="@Url.Action("StudentList", new { page = ViewBag.CurrentPage - 1 })">Previous</a>
+            }
+
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <a class="btn page-link @(ViewBag.CurrentPage == i ? "active" : "")" href="@Url.Action("StudentList", new { page = i })">@i</a>
+            }
+
+            @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+            {
+                <a class="page-link btn" href="@Url.Action("StudentList", new { page = ViewBag.CurrentPage + 1 })">Next</a>
+            }
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    //Search Button
+    $(document).ready(function () {
+        $("#SearchButton").click(function () {
+            var category = $("#category").val();
+            $.ajax({
+                url: '/Librarian/SearchStudent',
+                type: 'GET',
+                data: { category: category },
+                success: function (response) {
+                    if (response.success) {
+                        $("#ResultStudent").show();
+                        $("#Student").hide();
+                        var SearchResult = $("#SearchStudent");
+                        var resultsHtml = '';
+                        if (response.Students.length > 0) {
+                            response.Students.forEach(Student => {
+                                resultsHtml += `
+                                <tr>
+                                    <td class="border"><img class="" style="height:40px; width:50px;" src="${Student.ImgFile.replace("~", "")}" /></td>
+                                    <td class="border">${Student.Name}</td>
+                                    <td class="border">${Student.RollNo}</td>
+                                    <td class="border">${Student.Department}</td>
+                                    <td class="border">${Student.Phone}</td>
+                                    <td class="border">${Student.Email}</td>
+                                    <td class="border">${Student.Username}</td>
+                                    <td class="border">${Student.Date}</td>
+                                    <td class="border"><button class="button-c btn-danger">Edit</button></td>
+                                </tr>`;
+                            });
+                        } else {
+                            resultsHtml = '<tr><td colspan="8">No matching properties found.</td></tr>';
+                        }
+                        SearchResult.html(resultsHtml);
+                    } else {
+                        alert("No properties found.");
+                    }
+                },
+                error: function () {
+                    alert("An error occurred while searching.");
+                }
+            });
+        });
+    });
+
+</script>

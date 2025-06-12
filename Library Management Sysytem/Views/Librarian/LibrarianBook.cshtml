@@ -1,0 +1,148 @@
+﻿@model List<Library_Management_Sysytem.Context.Book>
+@{
+    ViewBag.Title = "LibrarianBook";
+    Layout = "~/Views/Shared/_Librarian-Layout.cshtml";
+}
+
+<style>
+    .pagination-container {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+        .pagination-container .page-link {
+            padding: 8px 14px;
+            background: #007bff;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            border: 1px solid #007bff;
+            transition: background-color 0.3s ease;
+        }
+
+            .pagination-container .page-link.active {
+                background: #0056b3;
+                border-color: #0056b3;
+                font-weight: bold;
+            }
+
+            .pagination-container .page-link:hover {
+                background: #003d7a;
+                color: #fff;
+            }
+            .fixsize{
+                margin-top:-5px;
+                height:20px;
+                width:20px;
+            }
+</style>
+
+<div class="card shadow">
+    <div class="card-header">
+        <a class="btn btn-primary float-end" href="@Url.Action("LibrarianAddBook","Librarian")">Add Book</a>
+    </div>
+    <div class="card-body">
+        <section class="mb-3">
+            <form id="searchForm" class="row g-3 justify-content-center">
+                <div class="col-md-3">
+                    <input type="text" class="form-control" placeholder="Book Name" name="bookName">
+                </div>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" placeholder="Author" name="Author">
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">Search</button>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
+
+@if (@TempData["BookUpdateSuccessMessage"] != null)
+{
+    <div class="alert alert-success text-center">@TempData["BookUpdateSuccessMessage"]</div>
+}
+@if (@TempData["AddBookSuccessMessage"] != null)
+{
+    <div class="alert alert-success text-center">@TempData["AddBookSuccessMessage"]</div>
+}
+<div id="searchResults" class="mt-4"></div>
+
+<div class="card mt-4">
+    <div class="card-header">
+        <h2 class="">Books Collections:@ViewBag.books</h2>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead class="table-dark">
+                <tr class="text-center">
+                    <th class="border">Picture</th>
+                    <th class="border">Book Name</th>
+                    <th class="border">Author</th>
+                    <th class="border">Language</th>
+                    <th class="border">Date</th>
+                    <th class="border">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="border text-center"> <img style="height:40px; width:40px;" src="@item.File.Replace("~", "")" /></td>
+                        <td class="border text-center">@item.Name</td>
+                        <td class="border text-center">@item.Author</td>
+                        <td class="border text-center">@item.Language</td>
+                        <td class="border text-center">@item.AddDate</td>
+                        <td class="border text-center">
+                            <a class="btn btn-success" href="@Url.Action("EditBook", "Librarian", new{ID = item.BookID})"><img class="fixsize" src="~/Assets/images/Icon/pen-solid.svg" /></a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+        <div class="pagination-container">
+            @if (ViewBag.CurrentPage > 1)
+            {
+                <a class="page-link" href="@Url.Action("LibrarianBook", new { page = ViewBag.CurrentPage - 1 })">Previous</a>
+            }
+
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <a class="page-link @(ViewBag.CurrentPage == i ? "active" : "")" href="@Url.Action("LibrarianBook", new { page = i })">@i</a>
+            }
+
+            @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+            {
+                <a class="page-link" href="@Url.Action("LibrarianBook", new { page = ViewBag.CurrentPage + 1 })">Next</a>
+            }
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#searchForm').submit(function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: '/Librarian/SearchBooks',
+                type: 'GET',
+                data: $(this).serialize(),
+                success: function (result) {
+                    $('#searchResults').html(result);
+                },
+                error: function () {
+                    $('#searchResults').html('<p class="text-danger">An error occurred while searching.</p>');
+                }
+            });
+        });
+    });
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

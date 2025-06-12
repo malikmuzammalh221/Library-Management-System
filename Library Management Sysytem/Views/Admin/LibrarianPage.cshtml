@@ -1,0 +1,45 @@
+﻿@model List<Library_Management_Sysytem.Context.Librarian>
+@{
+    ViewBag.Title = "LibrarianPage";
+    Layout = "~/Views/Shared/_Admin-Layout.cshtml";
+}
+
+<div class="card mt-4">
+    <div class="card-header">
+        <a class="btn btn-primary float-end" href="@Url.Action("Index","Admin")">Back to Main</a>
+        <h2 class="">Librarian List:@ViewBag.librarainscount</h2>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead class="table-dark">
+                <tr class="text-center">
+                    <th class="border">Picture</th>
+                    <th class="border">Name</th>
+                    <th class="border">Phone</th>
+                    <th class="border">Email</th>
+                    <th class="border">Username</th>
+                    <th class="border">Date</th>
+                    <th class="border">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="border text-center"> <img style="height:40px; width:40px;" src="@item.ImgFile.Replace("~","")" /></td>
+                        <td class="border text-center">@item.LiName</td>
+                        <td class="border text-center">@item.Phone</td>
+                        <td class="border text-center">@item.Email</td>
+                        <td class="border text-center">@item.Username</td>
+                        <td class="border text-center">@item.Date</td>
+                        <td class="border text-center">
+                            <a class="btn btn-danger" href="@Url.Action("DeleteLibrarian", "Admin", new { ID = item.IdLibrarian })" onclick="return confirm('Are you sure you want to delete this librarian?');">Delete</a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+

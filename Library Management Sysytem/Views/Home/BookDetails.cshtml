@@ -1,0 +1,32 @@
+﻿@model Library_Management_Sysytem.Context.Book
+@{
+    ViewBag.Title = "Book Details";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Ensure this is correct
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Book Details</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow p-3">
+                <div class="row g-0">
+                    <!-- Left Side: Image -->
+                    <div class="col-md-5">
+                        <img src="@Model.File.Replace("~", "")" alt="Book Image" class="img-fluid rounded-start w-100" style="height: 100%; object-fit: cover;" />
+                    </div>
+
+                    <!-- Right Side: Details -->
+                    <div class="col-md-7">
+                        <div class="card-body">
+                            <h3 class="card-title">@Model.Name</h3>
+                            <p class="card-text"><strong>Author:</strong> @Model.Author</p>
+                            <p class="card-text"><strong>Language:</strong> @Model.Language</p>
+                            <p class="card-text"><strong>Published Date:</strong> @Model.AddDate</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

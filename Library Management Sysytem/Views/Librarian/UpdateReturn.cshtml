@@ -1,0 +1,43 @@
+﻿@model Library_Management_Sysytem.Context.Reader
+@{
+    ViewBag.Title = "UpdateReturn";
+    Layout = "~/Views/Shared/_Librarian-Layout.cshtml";
+}
+
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-lg p-4">
+                    <div class="row align-items-center">
+                        <ul class="list-unstyled mb-3">
+                            <li><strong>Student Name:</strong>@Model.Name</li>
+                            <li><strong>Roll No:</strong>@Model.RollNo</li>
+                            <li><strong>Department:</strong>@Model.Department</li>
+                            <li><strong>Book Name:</strong>@Model.BName</li>
+                            <li><strong>Start Date:</strong>@Model.StartDate</li>
+                        </ul>
+                        @using (Html.BeginForm("UpdateReturns", "Librarian", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            <div class="form-horizontal">
+                                <h4>Return Book</h4>
+                                <p>Are you sure the book has returened?</p>
+                                <hr />
+                                @Html.HiddenFor(model => model.ReaderId)
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Return" class="btn btn-primary" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

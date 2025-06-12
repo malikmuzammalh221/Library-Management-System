@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Library_Management_Sysytem.Context.Book>
+@{
+    ViewBag.Title = "Books";
+}
+
+
+<!-- Search Section -->
+<section class="mb-5">
+    <div class="card">
+        <div class="card-body shadow">
+            <h2 class="text-center mb-4">Search Books</h2>
+            <form class="row g-3 justify-content-center">
+                <div class="col-md-3">
+                    <input type="text" class="form-control" placeholder="Book Name" name="bookName">
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select" name="category">
+                        <option selected>Choose Category</option>
+                        <option>Science</option>
+                        <option>Fiction</option>
+                        <option>History</option>
+                        <option>Technology</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select" name="type">
+                        <option selected>Choose Type</option>
+                        <option>Paperback</option>
+                        <option>Hardcover</option>
+                        <option>E-Book</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</section>
+
+<!-- Recently Added Books Section -->
+<section class="mb-5">
+    <h2 class="text-center mb-4">Books Collections</h2>
+    <hr />
+    <div class="row g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 col-sm-6">
+                <div class="card h-100 shadow-sm">
+                    <a href="@Url.Action("BookDetails","Home", new{ID = item.BookID})">
+                        <img src="@item.File.Replace("~","")" class="card-img-top" alt="Book Image" style="height: 250px; object-fit: cover;">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">Author:@item.Author</p>
+                        <p class="card-text">Language:@item.Language</p>
+                        <p class="card-text"><small class="text-muted">Date:@item.AddDate</small></p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>

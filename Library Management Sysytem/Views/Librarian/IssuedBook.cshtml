@@ -1,0 +1,126 @@
+﻿@model List<Library_Management_Sysytem.Context.Reader>
+@{
+    ViewBag.Title = "IssuedBook";
+    Layout = "~/Views/Shared/_Librarian-Layout.cshtml";
+}
+
+<style>
+    .pagination-container {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+        .pagination-container .page-link {
+            padding: 8px 14px;
+            background: #007bff;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            border: 1px solid #007bff;
+            transition: background-color 0.3s ease;
+        }
+
+            .pagination-container .page-link.active {
+                background: #0056b3;
+                border-color: #0056b3;
+                font-weight: bold;
+            }
+
+            .pagination-container .page-link:hover {
+                background: #003d7a;
+                color: #fff;
+            }
+</style>
+
+
+<div class="card shadow">
+    <div class="card-header">
+        <section class="mb-3 mt-3">
+            <form id="searchForm" class="row g-3 justify-content-center">
+                <div class="col-md-3">
+                    <input type="text" class="form-control" placeholder="Book Name" name="bookName">
+                </div>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" placeholder="Roll No" name="RollNo">
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">Search</button>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
+
+@if (TempData["ReturnUpdateSuccessMessage"] != null)
+{
+    <div class="alert alert-success text-center">@TempData["ReturnUpdateSuccessMessage"]</div>
+}
+@if (TempData["ReturnUpdateErrorMessage"] != null)
+{
+    <div class="alert alert-danger text-center">@TempData["ReturnUpdateErrorMessage"]</div>
+}
+
+<div class="card mt-4">
+    <div class="card-header">
+        <h2 class="">Reader List:@ViewBag.Readers</h2>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead class="table-dark">
+                <tr class="text-center">
+                    <th class="border">Student Name</th>
+                    <th class="border">Book Name</th>
+                    <th class="border">Start Date</th>
+                    <th class="border">End Date</th>
+                    <th class="border">Rs Charges per Day</th>
+                    <th class="border">Total Charges</th>
+                    <th class="border">Roll No</th>
+                    <th class="border">Department</th>
+                    <th class="border">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="border text-center">@item.Name</td>
+                        <td class="border text-center">@item.BName</td>
+                        <td class="border text-center">@item.StartDate</td>
+                        <td class="border text-center">@item.EndDate</td>
+                        <td class="border text-center">@item.ChargesPerDay</td>
+                        <td class="border text-center">@item.TotalCharges</td>
+                        <td class="border text-center">@item.RollNo</td>
+                        <td class="border text-center">@item.Department</td>
+                        <td class="border text-center">
+                            <a class="btn btn-success" href="@Url.Action("UpdateReturn","Librarian", new{ID = item.ReaderId})">Update</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="pagination-container">
+            @if (ViewBag.CurrentPage > 1)
+            {
+                <a class="page-link btn" href="@Url.Action("IssuedBook", new { page = ViewBag.CurrentPage - 1 })">Previous</a>
+            }
+
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <a class="btn page-link @(ViewBag.CurrentPage == i ? "active" : "")" href="@Url.Action("IssuedBook", new { page = i })">@i</a>
+            }
+
+            @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+            {
+                <a class="page-link btn" href="@Url.Action("IssuedBook", new { page = ViewBag.CurrentPage + 1 })">Next</a>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+

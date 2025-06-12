@@ -1,0 +1,753 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{ABEA750D-8FAB-414E-849C-03A2F99BA83C}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Library_Management_Sysytem</RootNamespace>
+    <AssemblyName>Library Management Sysytem</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44303</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.9\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.9\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Context\Book.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\DbModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DbModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\DbModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\DbModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DbModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Librarian.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Reader.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Role.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\User.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LibrarianController.cs" />
+    <Compile Include="Controllers\logInController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AddReaderViewModel.cs" />
+    <Compile Include="Models\AllViewModel.cs" />
+    <Compile Include="Models\DashbordViewModel.cs" />
+    <Compile Include="Models\LogInViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AssetsAdmin\css\bootstrap.min.css" />
+    <Content Include="AssetsAdmin\css\demo.css" />
+    <Content Include="AssetsAdmin\css\fonts.css" />
+    <Content Include="AssetsAdmin\css\fonts.min.css" />
+    <Content Include="AssetsAdmin\css\kaiadmin.css" />
+    <Content Include="AssetsAdmin\css\kaiadmin.min.css" />
+    <Content Include="AssetsAdmin\css\plugins.css" />
+    <Content Include="AssetsAdmin\css\plugins.min.css" />
+    <Content Include="AssetsAdmin\fonts\fontawesome\fa-brands-400.svg" />
+    <Content Include="AssetsAdmin\fonts\fontawesome\fa-regular-400.svg" />
+    <Content Include="AssetsAdmin\fonts\fontawesome\fa-solid-900.svg" />
+    <Content Include="AssetsAdmin\fonts\simple-line-icons\Simple-Line-Icons.svg" />
+    <Content Include="AssetsAdmin\img\arashmil.jpg" />
+    <Content Include="AssetsAdmin\img\bg-404.jpeg" />
+    <Content Include="AssetsAdmin\img\blogpost.jpg" />
+    <Content Include="AssetsAdmin\img\chadengle.jpg" />
+    <Content Include="AssetsAdmin\img\examples\example1-300x300.jpg" />
+    <Content Include="AssetsAdmin\img\examples\example1.jpeg" />
+    <Content Include="AssetsAdmin\img\examples\example10-300x300.jpg" />
+    <Content Include="AssetsAdmin\img\examples\example10.jpeg" />
+    <Content Include="AssetsAdmin\img\examples\example11-300x300.jpg" />
+    <Content Include="AssetsAdmin\img\examples\example11.jpeg" />
+    <Content Include="AssetsAdmin\img\examples\example12-300x300.jpg" />
+    <Content Include="AssetsAdmin\img\examples\example12.jpeg" />
+    <Content Include="AssetsAdmin\img\examples\example2-300x300.jpg" />
+    <Content Include="AssetsAdmin\img\examples\example2.jpeg" />
+    <Content Include="AssetsAdmin\img\examples\example3-300x300.jpg" />
+    <Content Include="AssetsAdmin\img\examples\example3.jpeg" />
+    <Content Include="AssetsAdmin\img\examples\example4-300x300.jpg" />
+    <Content Include="AssetsAdmin\img\examples\example4.jpeg" />
+    <Content Include="AssetsAdmin\img\examples\example5-300x300.jpg" />
+    <Content Include="AssetsAdmin\img\examples\example5.jpeg" />
+    <Content Include="AssetsAdmin\img\examples\example6-300x300.jpg" />
+    <Content Include="AssetsAdmin\img\examples\example6.jpeg" />
+    <Content Include="AssetsAdmin\img\examples\example7-300x300.jpg" />
+    <Content Include="AssetsAdmin\img\examples\example7.jpeg" />
+    <Content Include="AssetsAdmin\img\examples\example8-300x300.jpg" />
+    <Content Include="AssetsAdmin\img\examples\example8.jpeg" />
+    <Content Include="AssetsAdmin\img\examples\example9-300x300.jpg" />
+    <Content Include="AssetsAdmin\img\examples\example9.jpeg" />
+    <Content Include="AssetsAdmin\img\examples\logo.svg" />
+    <Content Include="AssetsAdmin\img\examples\logo1.svg" />
+    <Content Include="AssetsAdmin\img\examples\logo2.svg" />
+    <Content Include="AssetsAdmin\img\examples\logoinvoice.svg" />
+    <Content Include="AssetsAdmin\img\examples\product1.jpg" />
+    <Content Include="AssetsAdmin\img\examples\product10.jpeg" />
+    <Content Include="AssetsAdmin\img\examples\product11.jpeg" />
+    <Content Include="AssetsAdmin\img\examples\product12.jpeg" />
+    <Content Include="AssetsAdmin\img\examples\product2.jpg" />
+    <Content Include="AssetsAdmin\img\examples\product3.jpg" />
+    <Content Include="AssetsAdmin\img\examples\product4.jpg" />
+    <Content Include="AssetsAdmin\img\examples\product5.jpg" />
+    <Content Include="AssetsAdmin\img\examples\product6.jpg" />
+    <Content Include="AssetsAdmin\img\examples\product7.jpg" />
+    <Content Include="AssetsAdmin\img\examples\product8.jpg" />
+    <Content Include="AssetsAdmin\img\flags\ad.png" />
+    <Content Include="AssetsAdmin\img\flags\ae.png" />
+    <Content Include="AssetsAdmin\img\flags\af.png" />
+    <Content Include="AssetsAdmin\img\flags\ag.png" />
+    <Content Include="AssetsAdmin\img\flags\ai.png" />
+    <Content Include="AssetsAdmin\img\flags\al.png" />
+    <Content Include="AssetsAdmin\img\flags\am.png" />
+    <Content Include="AssetsAdmin\img\flags\an.png" />
+    <Content Include="AssetsAdmin\img\flags\ao.png" />
+    <Content Include="AssetsAdmin\img\flags\ar.png" />
+    <Content Include="AssetsAdmin\img\flags\as.png" />
+    <Content Include="AssetsAdmin\img\flags\at.png" />
+    <Content Include="AssetsAdmin\img\flags\au.png" />
+    <Content Include="AssetsAdmin\img\flags\aw.png" />
+    <Content Include="AssetsAdmin\img\flags\ax.png" />
+    <Content Include="AssetsAdmin\img\flags\az.png" />
+    <Content Include="AssetsAdmin\img\flags\ba.png" />
+    <Content Include="AssetsAdmin\img\flags\bb.png" />
+    <Content Include="AssetsAdmin\img\flags\bd.png" />
+    <Content Include="AssetsAdmin\img\flags\be.png" />
+    <Content Include="AssetsAdmin\img\flags\bf.png" />
+    <Content Include="AssetsAdmin\img\flags\bg.png" />
+    <Content Include="AssetsAdmin\img\flags\bh.png" />
+    <Content Include="AssetsAdmin\img\flags\bi.png" />
+    <Content Include="AssetsAdmin\img\flags\bj.png" />
+    <Content Include="AssetsAdmin\img\flags\bm.png" />
+    <Content Include="AssetsAdmin\img\flags\bn.png" />
+    <Content Include="AssetsAdmin\img\flags\bo.png" />
+    <Content Include="AssetsAdmin\img\flags\br.png" />
+    <Content Include="AssetsAdmin\img\flags\bs.png" />
+    <Content Include="AssetsAdmin\img\flags\bt.png" />
+    <Content Include="AssetsAdmin\img\flags\bv.png" />
+    <Content Include="AssetsAdmin\img\flags\bw.png" />
+    <Content Include="AssetsAdmin\img\flags\by.png" />
+    <Content Include="AssetsAdmin\img\flags\bz.png" />
+    <Content Include="AssetsAdmin\img\flags\ca.png" />
+    <Content Include="AssetsAdmin\img\flags\catalonia.png" />
+    <Content Include="AssetsAdmin\img\flags\cc.png" />
+    <Content Include="AssetsAdmin\img\flags\cd.png" />
+    <Content Include="AssetsAdmin\img\flags\cf.png" />
+    <Content Include="AssetsAdmin\img\flags\cg.png" />
+    <Content Include="AssetsAdmin\img\flags\ch.png" />
+    <Content Include="AssetsAdmin\img\flags\ci.png" />
+    <Content Include="AssetsAdmin\img\flags\ck.png" />
+    <Content Include="AssetsAdmin\img\flags\cl.png" />
+    <Content Include="AssetsAdmin\img\flags\cm.png" />
+    <Content Include="AssetsAdmin\img\flags\cn.png" />
+    <Content Include="AssetsAdmin\img\flags\co.png" />
+    <Content Include="AssetsAdmin\img\flags\cr.png" />
+    <Content Include="AssetsAdmin\img\flags\cs.png" />
+    <Content Include="AssetsAdmin\img\flags\cu.png" />
+    <Content Include="AssetsAdmin\img\flags\cv.png" />
+    <Content Include="AssetsAdmin\img\flags\cx.png" />
+    <Content Include="AssetsAdmin\img\flags\cy.png" />
+    <Content Include="AssetsAdmin\img\flags\cz.png" />
+    <Content Include="AssetsAdmin\img\flags\de.png" />
+    <Content Include="AssetsAdmin\img\flags\dj.png" />
+    <Content Include="AssetsAdmin\img\flags\dk.png" />
+    <Content Include="AssetsAdmin\img\flags\dm.png" />
+    <Content Include="AssetsAdmin\img\flags\do.png" />
+    <Content Include="AssetsAdmin\img\flags\dz.png" />
+    <Content Include="AssetsAdmin\img\flags\ec.png" />
+    <Content Include="AssetsAdmin\img\flags\ee.png" />
+    <Content Include="AssetsAdmin\img\flags\eg.png" />
+    <Content Include="AssetsAdmin\img\flags\eh.png" />
+    <Content Include="AssetsAdmin\img\flags\england.png" />
+    <Content Include="AssetsAdmin\img\flags\er.png" />
+    <Content Include="AssetsAdmin\img\flags\es.png" />
+    <Content Include="AssetsAdmin\img\flags\et.png" />
+    <Content Include="AssetsAdmin\img\flags\europeanunion.png" />
+    <Content Include="AssetsAdmin\img\flags\fam.png" />
+    <Content Include="AssetsAdmin\img\flags\fi.png" />
+    <Content Include="AssetsAdmin\img\flags\fj.png" />
+    <Content Include="AssetsAdmin\img\flags\fk.png" />
+    <Content Include="AssetsAdmin\img\flags\fm.png" />
+    <Content Include="AssetsAdmin\img\flags\fo.png" />
+    <Content Include="AssetsAdmin\img\flags\fr.png" />
+    <Content Include="AssetsAdmin\img\flags\ga.png" />
+    <Content Include="AssetsAdmin\img\flags\gb.png" />
+    <Content Include="AssetsAdmin\img\flags\gd.png" />
+    <Content Include="AssetsAdmin\img\flags\ge.png" />
+    <Content Include="AssetsAdmin\img\flags\gf.png" />
+    <Content Include="AssetsAdmin\img\flags\gh.png" />
+    <Content Include="AssetsAdmin\img\flags\gi.png" />
+    <Content Include="AssetsAdmin\img\flags\gl.png" />
+    <Content Include="AssetsAdmin\img\flags\gm.png" />
+    <Content Include="AssetsAdmin\img\flags\gn.png" />
+    <Content Include="AssetsAdmin\img\flags\gp.png" />
+    <Content Include="AssetsAdmin\img\flags\gq.png" />
+    <Content Include="AssetsAdmin\img\flags\gr.png" />
+    <Content Include="AssetsAdmin\img\flags\gs.png" />
+    <Content Include="AssetsAdmin\img\flags\gt.png" />
+    <Content Include="AssetsAdmin\img\flags\gu.png" />
+    <Content Include="AssetsAdmin\img\flags\gw.png" />
+    <Content Include="AssetsAdmin\img\flags\gy.png" />
+    <Content Include="AssetsAdmin\img\flags\hk.png" />
+    <Content Include="AssetsAdmin\img\flags\hm.png" />
+    <Content Include="AssetsAdmin\img\flags\hn.png" />
+    <Content Include="AssetsAdmin\img\flags\hr.png" />
+    <Content Include="AssetsAdmin\img\flags\ht.png" />
+    <Content Include="AssetsAdmin\img\flags\hu.png" />
+    <Content Include="AssetsAdmin\img\flags\id.png" />
+    <Content Include="AssetsAdmin\img\flags\ie.png" />
+    <Content Include="AssetsAdmin\img\flags\il.png" />
+    <Content Include="AssetsAdmin\img\flags\in.png" />
+    <Content Include="AssetsAdmin\img\flags\io.png" />
+    <Content Include="AssetsAdmin\img\flags\iq.png" />
+    <Content Include="AssetsAdmin\img\flags\ir.png" />
+    <Content Include="AssetsAdmin\img\flags\is.png" />
+    <Content Include="AssetsAdmin\img\flags\it.png" />
+    <Content Include="AssetsAdmin\img\flags\jm.png" />
+    <Content Include="AssetsAdmin\img\flags\jo.png" />
+    <Content Include="AssetsAdmin\img\flags\jp.png" />
+    <Content Include="AssetsAdmin\img\flags\ke.png" />
+    <Content Include="AssetsAdmin\img\flags\kg.png" />
+    <Content Include="AssetsAdmin\img\flags\kh.png" />
+    <Content Include="AssetsAdmin\img\flags\ki.png" />
+    <Content Include="AssetsAdmin\img\flags\km.png" />
+    <Content Include="AssetsAdmin\img\flags\kn.png" />
+    <Content Include="AssetsAdmin\img\flags\kp.png" />
+    <Content Include="AssetsAdmin\img\flags\kr.png" />
+    <Content Include="AssetsAdmin\img\flags\kw.png" />
+    <Content Include="AssetsAdmin\img\flags\ky.png" />
+    <Content Include="AssetsAdmin\img\flags\kz.png" />
+    <Content Include="AssetsAdmin\img\flags\la.png" />
+    <Content Include="AssetsAdmin\img\flags\lb.png" />
+    <Content Include="AssetsAdmin\img\flags\lc.png" />
+    <Content Include="AssetsAdmin\img\flags\li.png" />
+    <Content Include="AssetsAdmin\img\flags\lk.png" />
+    <Content Include="AssetsAdmin\img\flags\lr.png" />
+    <Content Include="AssetsAdmin\img\flags\ls.png" />
+    <Content Include="AssetsAdmin\img\flags\lt.png" />
+    <Content Include="AssetsAdmin\img\flags\lu.png" />
+    <Content Include="AssetsAdmin\img\flags\lv.png" />
+    <Content Include="AssetsAdmin\img\flags\ly.png" />
+    <Content Include="AssetsAdmin\img\flags\ma.png" />
+    <Content Include="AssetsAdmin\img\flags\mc.png" />
+    <Content Include="AssetsAdmin\img\flags\md.png" />
+    <Content Include="AssetsAdmin\img\flags\me.png" />
+    <Content Include="AssetsAdmin\img\flags\mg.png" />
+    <Content Include="AssetsAdmin\img\flags\mh.png" />
+    <Content Include="AssetsAdmin\img\flags\mk.png" />
+    <Content Include="AssetsAdmin\img\flags\ml.png" />
+    <Content Include="AssetsAdmin\img\flags\mm.png" />
+    <Content Include="AssetsAdmin\img\flags\mn.png" />
+    <Content Include="AssetsAdmin\img\flags\mo.png" />
+    <Content Include="AssetsAdmin\img\flags\mp.png" />
+    <Content Include="AssetsAdmin\img\flags\mq.png" />
+    <Content Include="AssetsAdmin\img\flags\mr.png" />
+    <Content Include="AssetsAdmin\img\flags\ms.png" />
+    <Content Include="AssetsAdmin\img\flags\mt.png" />
+    <Content Include="AssetsAdmin\img\flags\mu.png" />
+    <Content Include="AssetsAdmin\img\flags\mv.png" />
+    <Content Include="AssetsAdmin\img\flags\mw.png" />
+    <Content Include="AssetsAdmin\img\flags\mx.png" />
+    <Content Include="AssetsAdmin\img\flags\my.png" />
+    <Content Include="AssetsAdmin\img\flags\mz.png" />
+    <Content Include="AssetsAdmin\img\flags\na.png" />
+    <Content Include="AssetsAdmin\img\flags\nc.png" />
+    <Content Include="AssetsAdmin\img\flags\ne.png" />
+    <Content Include="AssetsAdmin\img\flags\nf.png" />
+    <Content Include="AssetsAdmin\img\flags\ng.png" />
+    <Content Include="AssetsAdmin\img\flags\ni.png" />
+    <Content Include="AssetsAdmin\img\flags\nl.png" />
+    <Content Include="AssetsAdmin\img\flags\no.png" />
+    <Content Include="AssetsAdmin\img\flags\np.png" />
+    <Content Include="AssetsAdmin\img\flags\nr.png" />
+    <Content Include="AssetsAdmin\img\flags\nu.png" />
+    <Content Include="AssetsAdmin\img\flags\nz.png" />
+    <Content Include="AssetsAdmin\img\flags\om.png" />
+    <Content Include="AssetsAdmin\img\flags\pa.png" />
+    <Content Include="AssetsAdmin\img\flags\pe.png" />
+    <Content Include="AssetsAdmin\img\flags\pf.png" />
+    <Content Include="AssetsAdmin\img\flags\pg.png" />
+    <Content Include="AssetsAdmin\img\flags\ph.png" />
+    <Content Include="AssetsAdmin\img\flags\pk.png" />
+    <Content Include="AssetsAdmin\img\flags\pl.png" />
+    <Content Include="AssetsAdmin\img\flags\pm.png" />
+    <Content Include="AssetsAdmin\img\flags\pn.png" />
+    <Content Include="AssetsAdmin\img\flags\pr.png" />
+    <Content Include="AssetsAdmin\img\flags\ps.png" />
+    <Content Include="AssetsAdmin\img\flags\pt.png" />
+    <Content Include="AssetsAdmin\img\flags\pw.png" />
+    <Content Include="AssetsAdmin\img\flags\py.png" />
+    <Content Include="AssetsAdmin\img\flags\qa.png" />
+    <Content Include="AssetsAdmin\img\flags\re.png" />
+    <Content Include="AssetsAdmin\img\flags\readme.txt" />
+    <Content Include="AssetsAdmin\img\flags\ro.png" />
+    <Content Include="AssetsAdmin\img\flags\rs.png" />
+    <Content Include="AssetsAdmin\img\flags\ru.png" />
+    <Content Include="AssetsAdmin\img\flags\rw.png" />
+    <Content Include="AssetsAdmin\img\flags\sa.png" />
+    <Content Include="AssetsAdmin\img\flags\sb.png" />
+    <Content Include="AssetsAdmin\img\flags\sc.png" />
+    <Content Include="AssetsAdmin\img\flags\scotland.png" />
+    <Content Include="AssetsAdmin\img\flags\sd.png" />
+    <Content Include="AssetsAdmin\img\flags\se.png" />
+    <Content Include="AssetsAdmin\img\flags\sg.png" />
+    <Content Include="AssetsAdmin\img\flags\sh.png" />
+    <Content Include="AssetsAdmin\img\flags\si.png" />
+    <Content Include="AssetsAdmin\img\flags\sj.png" />
+    <Content Include="AssetsAdmin\img\flags\sk.png" />
+    <Content Include="AssetsAdmin\img\flags\sl.png" />
+    <Content Include="AssetsAdmin\img\flags\sm.png" />
+    <Content Include="AssetsAdmin\img\flags\sn.png" />
+    <Content Include="AssetsAdmin\img\flags\so.png" />
+    <Content Include="AssetsAdmin\img\flags\sr.png" />
+    <Content Include="AssetsAdmin\img\flags\st.png" />
+    <Content Include="AssetsAdmin\img\flags\sv.png" />
+    <Content Include="AssetsAdmin\img\flags\sy.png" />
+    <Content Include="AssetsAdmin\img\flags\sz.png" />
+    <Content Include="AssetsAdmin\img\flags\tc.png" />
+    <Content Include="AssetsAdmin\img\flags\td.png" />
+    <Content Include="AssetsAdmin\img\flags\tf.png" />
+    <Content Include="AssetsAdmin\img\flags\tg.png" />
+    <Content Include="AssetsAdmin\img\flags\th.png" />
+    <Content Include="AssetsAdmin\img\flags\tj.png" />
+    <Content Include="AssetsAdmin\img\flags\tk.png" />
+    <Content Include="AssetsAdmin\img\flags\tl.png" />
+    <Content Include="AssetsAdmin\img\flags\tm.png" />
+    <Content Include="AssetsAdmin\img\flags\tn.png" />
+    <Content Include="AssetsAdmin\img\flags\to.png" />
+    <Content Include="AssetsAdmin\img\flags\tr.png" />
+    <Content Include="AssetsAdmin\img\flags\tt.png" />
+    <Content Include="AssetsAdmin\img\flags\tv.png" />
+    <Content Include="AssetsAdmin\img\flags\tw.png" />
+    <Content Include="AssetsAdmin\img\flags\tz.png" />
+    <Content Include="AssetsAdmin\img\flags\ua.png" />
+    <Content Include="AssetsAdmin\img\flags\ug.png" />
+    <Content Include="AssetsAdmin\img\flags\um.png" />
+    <Content Include="AssetsAdmin\img\flags\us.png" />
+    <Content Include="AssetsAdmin\img\flags\uy.png" />
+    <Content Include="AssetsAdmin\img\flags\uz.png" />
+    <Content Include="AssetsAdmin\img\flags\va.png" />
+    <Content Include="AssetsAdmin\img\flags\vc.png" />
+    <Content Include="AssetsAdmin\img\flags\ve.png" />
+    <Content Include="AssetsAdmin\img\flags\vg.png" />
+    <Content Include="AssetsAdmin\img\flags\vi.png" />
+    <Content Include="AssetsAdmin\img\flags\vn.png" />
+    <Content Include="AssetsAdmin\img\flags\vu.png" />
+    <Content Include="AssetsAdmin\img\flags\wales.png" />
+    <Content Include="AssetsAdmin\img\flags\wf.png" />
+    <Content Include="AssetsAdmin\img\flags\ws.png" />
+    <Content Include="AssetsAdmin\img\flags\ye.png" />
+    <Content Include="AssetsAdmin\img\flags\yt.png" />
+    <Content Include="AssetsAdmin\img\flags\za.png" />
+    <Content Include="AssetsAdmin\img\flags\zm.png" />
+    <Content Include="AssetsAdmin\img\flags\zw.png" />
+    <Content Include="AssetsAdmin\img\img-shadow.png" />
+    <Content Include="AssetsAdmin\img\jm_denis.jpg" />
+    <Content Include="AssetsAdmin\img\kaiadmin\demo1.png" />
+    <Content Include="AssetsAdmin\img\kaiadmin\demo2.png" />
+    <Content Include="AssetsAdmin\img\kaiadmin\demo3.png" />
+    <Content Include="AssetsAdmin\img\kaiadmin\demo4.png" />
+    <Content Include="AssetsAdmin\img\kaiadmin\demo5.png" />
+    <Content Include="AssetsAdmin\img\kaiadmin\demo6.png" />
+    <Content Include="AssetsAdmin\img\kaiadmin\demo7.png" />
+    <Content Include="AssetsAdmin\img\kaiadmin\demo8.png" />
+    <Content Include="AssetsAdmin\img\kaiadmin\demo9.png" />
+    <Content Include="AssetsAdmin\img\kaiadmin\favicon.ico" />
+    <Content Include="AssetsAdmin\img\kaiadmin\favicon.png" />
+    <Content Include="AssetsAdmin\img\kaiadmin\favicon.svg" />
+    <Content Include="AssetsAdmin\img\kaiadmin\icon.png" />
+    <Content Include="AssetsAdmin\img\kaiadmin\icon.svg" />
+    <Content Include="AssetsAdmin\img\kaiadmin\logo_dark.png" />
+    <Content Include="AssetsAdmin\img\kaiadmin\logo_dark.svg" />
+    <Content Include="AssetsAdmin\img\kaiadmin\logo_documentation.png" />
+    <Content Include="AssetsAdmin\img\kaiadmin\logo_light.png" />
+    <Content Include="AssetsAdmin\img\kaiadmin\logo_light.svg" />
+    <Content Include="AssetsAdmin\img\logoproduct.svg" />
+    <Content Include="AssetsAdmin\img\logoproduct2.svg" />
+    <Content Include="AssetsAdmin\img\logoproduct3.svg" />
+    <Content Include="AssetsAdmin\img\mlane.jpg" />
+    <Content Include="AssetsAdmin\img\profile.jpg" />
+    <Content Include="AssetsAdmin\img\profile2.jpg" />
+    <Content Include="AssetsAdmin\img\sauro.jpg" />
+    <Content Include="AssetsAdmin\img\talha.jpg" />
+    <Content Include="AssetsAdmin\img\undraw\undraw_blank_canvas_3rbb.svg" />
+    <Content Include="AssetsAdmin\img\undraw\undraw_creative_team_r90h.svg" />
+    <Content Include="AssetsAdmin\img\undraw\undraw_empty_xct9.svg" />
+    <Content Include="AssetsAdmin\img\undraw\undraw_Hello_qnas.svg" />
+    <Content Include="AssetsAdmin\img\undraw\undraw_not_found_60pq.svg" />
+    <Content Include="AssetsAdmin\img\undraw\undraw_no_data_qbuo.svg" />
+    <Content Include="AssetsAdmin\img\undraw\undraw_page_not_found_su7k.svg" />
+    <Content Include="AssetsAdmin\img\undraw\undraw_sign_in_e6hj.svg" />
+    <Content Include="AssetsAdmin\img\undraw\undraw_tabs_jf82.svg" />
+    <Content Include="AssetsAdmin\img\undraw\undraw_Taken_if77.svg" />
+    <Content Include="AssetsAdmin\img\undraw\undraw_update_uxn2.svg" />
+    <Content Include="AssetsAdmin\img\undraw\undraw_upgrade_06a0.svg" />
+    <Content Include="AssetsAdmin\img\visa.svg" />
+    <Content Include="AssetsAdmin\js\core\bootstrap.min.js" />
+    <Content Include="AssetsAdmin\js\core\jquery-3.7.1.min.js" />
+    <Content Include="AssetsAdmin\js\core\popper.min.js" />
+    <Content Include="AssetsAdmin\js\demo.js" />
+    <Content Include="AssetsAdmin\js\kaiadmin.js" />
+    <Content Include="AssetsAdmin\js\kaiadmin.min.js" />
+    <Content Include="AssetsAdmin\js\plugin\bootstrap-notify\bootstrap-notify.min.js" />
+    <Content Include="AssetsAdmin\js\plugin\bootstrap-tagsinput\bootstrap-tagsinput.min.js" />
+    <Content Include="AssetsAdmin\js\plugin\bootstrap-toggle\bootstrap-toggle.min.js" />
+    <Content Include="AssetsAdmin\js\plugin\chart-circle\circles.min.js" />
+    <Content Include="AssetsAdmin\js\plugin\chart.js\chart.min.js" />
+    <Content Include="AssetsAdmin\js\plugin\datatables\datatables.min.js" />
+    <Content Include="AssetsAdmin\js\plugin\datepicker\bootstrap-datetimepicker.min.js" />
+    <Content Include="AssetsAdmin\js\plugin\dropzone\dropzone.min.js" />
+    <Content Include="AssetsAdmin\js\plugin\fullcalendar\fullcalendar.min.js" />
+    <Content Include="AssetsAdmin\js\plugin\gmaps\gmaps.js" />
+    <Content Include="AssetsAdmin\js\plugin\jquery-scrollbar\jquery.scrollbar.min.js" />
+    <Content Include="AssetsAdmin\js\plugin\jquery.magnific-popup\jquery.magnific-popup.min.js" />
+    <Content Include="AssetsAdmin\js\plugin\jquery.sparkline\jquery.sparkline.min.js" />
+    <Content Include="AssetsAdmin\js\plugin\jquery.validate\jquery.validate.min.js" />
+    <Content Include="AssetsAdmin\js\plugin\jsvectormap\jsvectormap.min.js" />
+    <Content Include="AssetsAdmin\js\plugin\jsvectormap\world.js" />
+    <Content Include="AssetsAdmin\js\plugin\list.js\list.min.js" />
+    <Content Include="AssetsAdmin\js\plugin\moment\moment.min.js" />
+    <Content Include="AssetsAdmin\js\plugin\owl-carousel\ajax-loader.gif" />
+    <Content Include="AssetsAdmin\js\plugin\owl-carousel\owl.carousel.min.js" />
+    <Content Include="AssetsAdmin\js\plugin\owl-carousel\owl.video.play.png" />
+    <Content Include="AssetsAdmin\js\plugin\select2\select2.full.min.js" />
+    <Content Include="AssetsAdmin\js\plugin\sortable\sortable.min.js" />
+    <Content Include="AssetsAdmin\js\plugin\sticky-sidebar\sticky-sidebar.min.js" />
+    <Content Include="AssetsAdmin\js\plugin\summernote\summernote-lite.min.js" />
+    <Content Include="AssetsAdmin\js\plugin\sweetalert\sweetalert.min.js" />
+    <Content Include="AssetsAdmin\js\plugin\webfont\webfont.min.js" />
+    <Content Include="AssetsAdmin\js\setting-demo.js" />
+    <Content Include="AssetsAdmin\js\setting-demo2.js" />
+    <Content Include="Assets\images\About Library.jpg" />
+    <Content Include="Assets\images\Home Page Banner.png" />
+    <Content Include="Assets\images\Icon\book-medical-solid.svg" />
+    <Content Include="Assets\images\Icon\pen-solid.svg" />
+    <Content Include="Assets\style.css" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Context\DbModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DbModel.edmx</DependentUpon>
+      <LastGenOutput>DbModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Context\DbModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DbModel.edmx</DependentUpon>
+      <LastGenOutput>DbModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Context\DbModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DbModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Context\DbModel.edmx.diagram">
+      <DependentUpon>DbModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="AssetsAdmin\css\demo.css.map" />
+    <Content Include="AssetsAdmin\css\kaiadmin.css.map" />
+    <Content Include="AssetsAdmin\css\plugins.css.map" />
+    <Content Include="AssetsAdmin\fonts\fontawesome\fa-brands-400.eot" />
+    <Content Include="AssetsAdmin\fonts\fontawesome\fa-brands-400.ttf" />
+    <Content Include="AssetsAdmin\fonts\fontawesome\fa-brands-400.woff" />
+    <Content Include="AssetsAdmin\fonts\fontawesome\fa-brands-400.woff2" />
+    <Content Include="AssetsAdmin\fonts\fontawesome\fa-regular-400.eot" />
+    <Content Include="AssetsAdmin\fonts\fontawesome\fa-regular-400.ttf" />
+    <Content Include="AssetsAdmin\fonts\fontawesome\fa-regular-400.woff" />
+    <Content Include="AssetsAdmin\fonts\fontawesome\fa-regular-400.woff2" />
+    <Content Include="AssetsAdmin\fonts\fontawesome\fa-solid-900.eot" />
+    <Content Include="AssetsAdmin\fonts\fontawesome\fa-solid-900.ttf" />
+    <Content Include="AssetsAdmin\fonts\fontawesome\fa-solid-900.woff" />
+    <Content Include="AssetsAdmin\fonts\fontawesome\fa-solid-900.woff2" />
+    <Content Include="AssetsAdmin\fonts\simple-line-icons\Simple-Line-Icons.eot" />
+    <Content Include="AssetsAdmin\fonts\simple-line-icons\Simple-Line-Icons.ttf" />
+    <Content Include="AssetsAdmin\fonts\simple-line-icons\Simple-Line-Icons.woff" />
+    <Content Include="AssetsAdmin\fonts\simple-line-icons\Simple-Line-Icons.woff2" />
+    <Content Include="AssetsAdmin\fonts\summernote\summernote.eot" />
+    <Content Include="AssetsAdmin\fonts\summernote\summernote.ttf" />
+    <Content Include="AssetsAdmin\fonts\summernote\summernote.woff" />
+    <Content Include="AssetsAdmin\fonts\summernote\summernote.woff2" />
+    <None Include="Scripts\jquery-3.7.0.intellisense.js" />
+    <Content Include="Scripts\jquery-3.7.0.js" />
+    <Content Include="Scripts\jquery-3.7.0.min.js" />
+    <Content Include="Scripts\jquery-3.7.0.slim.js" />
+    <Content Include="Scripts\jquery-3.7.0.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Books.cshtml" />
+    <Content Include="Views\logIn\Login.cshtml" />
+    <Content Include="Views\logIn\Register.cshtml" />
+    <Content Include="Views\Librarian\LibrarianProfile.cshtml" />
+    <Content Include="Views\Shared\_Librarian-Layout.cshtml" />
+    <Content Include="Views\Librarian\LibrarianBook.cshtml" />
+    <Content Include="Views\Librarian\LibrarianAddBook.cshtml" />
+    <Content Include="Views\Librarian\StudentList.cshtml" />
+    <Content Include="Views\Librarian\AddStudent.cshtml" />
+    <Content Include="Views\Librarian\UpdateProfile.cshtml" />
+    <Content Include="Views\Librarian\IssuedBook.cshtml" />
+    <Content Include="Views\Librarian\AddReader.cshtml" />
+    <Content Include="Views\Librarian\UpdateStudent.cshtml" />
+    <Content Include="Views\Librarian\UpdateReturn.cshtml" />
+    <Content Include="Views\Librarian\EditBook.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Shared\_Admin-Layout.cshtml" />
+    <Content Include="Views\Home\BookDetails.cshtml" />
+    <Content Include="Views\Admin\LibrarianPage.cshtml" />
+    <Content Include="Views\Admin\BookPage.cshtml" />
+    <Content Include="Views\Admin\UserPage.cshtml" />
+    <Content Include="Views\Admin\ReaderPage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Content\BookImg\" />
+    <Folder Include="Content\ImgLibrarian\" />
+    <Folder Include="Content\UserImg\" />
+    <Folder Include="Views\Default\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\bootstrap.rtl.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\bootstrap.esm.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.7.0.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>54409</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44303/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

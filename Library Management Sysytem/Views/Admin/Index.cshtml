@@ -1,0 +1,54 @@
+﻿@model Library_Management_Sysytem.Models.DashbordViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Admin-Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Admin Dashboard</h2>
+
+    <div class="row g-4 text-white">
+
+        <!-- Librarian Count -->
+        <div class="col-md-3 col-sm-6">
+            <a href="@Url.Action("LibrarianPage","Admin")">
+                <div class="card bg-primary shadow text-center p-3">
+                    <h5 class="card-title">Librarians</h5>
+                    <h2>@Model.TotalLibrarians</h2>
+                </div>
+            </a>
+        </div>
+
+        <!-- Books Count -->
+        <div class="col-md-3 col-sm-6">
+            <a href="@Url.Action("BookPage","Admin")">
+                <div class="card bg-warning shadow text-center p-3">
+                    <h5 class="card-title">Total Books</h5>
+                    <h2>@Model.TotalBooks</h2>
+                </div>
+            </a>
+        </div>
+
+
+        <!-- User Count -->
+        <div class="col-md-3 col-sm-6">
+            <a href="@Url.Action("UserPage","Admin")">
+                <div class="card bg-success shadow text-center p-3">
+                    <h5 class="card-title">Users</h5>
+                    <h2>@Model.TotalUsers</h2>
+                </div>
+            </a>
+        </div>
+
+        <!-- Issued Books Count -->
+        <div class="col-md-3 col-sm-6">
+            <a href="@Url.Action("ReaderPage","Admin")">
+                <div class="card bg-danger shadow text-center p-3">
+                    <h5 class="card-title">Issued Books</h5>
+                    <h2>@Model.IssuedBooks</h2>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+

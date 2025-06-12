@@ -1,0 +1,159 @@
+﻿@model List<Library_Management_Sysytem.Context.Book>
+@{
+    ViewBag.Title = "Library Management System - Home";
+}
+
+<img src="~/Assets/images/Home Page Banner.png" alt="Library Banner" class="w-100" style="height: 400px; margin-top:-15px;">
+
+<main class="container my-5">
+
+    <!-- Search Section -->
+    <section class="mb-5">
+        <div class="card mt-5">
+            <div class="card-body shadow">
+                <h2 class="text-center mb-4">Search Books</h2>
+                <form class="row g-3 justify-content-center" id="searchForm">
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" placeholder="Book Name" id="bookName">
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary w-100" id="searchBtn">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <div id="searchResultSection" class="mb-5" style="display:none;">
+        <h2 class="text-center mb-4">Search Results</h2>
+        <div class="row g-4" id="searchResults">
+        </div>
+    </div>
+
+    <!-- Recently Added Books Section -->
+    <section class="mb-5" id="BeforeResult">
+        <h2 class="text-center mb-4">Recently Added Books</h2>
+        <div class="row g-4">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 col-sm-6">
+                    <div class="card h-100 shadow-sm">
+                        <a href="@Url.Action("BookDetails","Home", new{ID = item.BookID})">
+                            <img src="@item.File.Replace("~","")" class="card-img-top" alt="Book Image" style="height: 250px; object-fit: cover;">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Name</h5>
+                            <p class="card-text">Author:@item.Author</p>
+                            <p class="card-text">Language:@item.Language</p>
+                            <p class="card-text"><small class="text-muted">Date:@item.AddDate</small></p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+    <!-- About Our Library -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <img src="~/Assets/images/About Library.jpg" alt="Library Image" class="img-fluid rounded shadow-sm">
+                </div>
+
+                <div class="col-md-6">
+                    <h2 class="mb-4">About Our Library</h2>
+                    <p class="lead">
+                        Welcome to our library — a place of knowledge, imagination, and growth. Our collection
+                        features thousands of books, journals, and digital resources, catering to students,
+                        researchers, and book lovers of all ages.
+                    </p>
+                    <p>
+                        With a peaceful reading environment and modern facilities, we aim to inspire learning
+                        and foster a love for literature. Our dedicated team is always ready to assist you in
+                        finding the perfect resource for your needs.
+                    </p>
+                    <a href="#" class="btn btn-primary mt-3">Read More</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+</main>
+
+<script>
+    $(document).ready(function () {
+    $('#searchForm').on('submit', function (e) {
+        e.preventDefault(); // Prevent default form submission
+
+        var name = $('#bookName').val().trim();
+
+        if (!name) {
+            alert('Please enter a book name to search');
+            return;
+        }
+
+        $.ajax({
+            url: 'Home/SearchBooks',
+            type: 'GET',
+            data: { name: name },
+            beforeSend: function() {
+                $('#searchBtn').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Searching...');
+            },
+            success: function (response) {
+                $('#searchBtn').html('Search');
+
+                if (response.success) {
+                    $('#BeforeResult').hide();
+                    $('#searchResultSection').show();
+
+                    let resultHtml = '';
+                    const books = response.result;
+
+                    if (books && books.length > 0) {
+                        books.forEach(function (item) {
+                            const addDate = new Date(parseInt(item.AddDate.substr(6))).toLocaleDateString() || item.AddDate;
+
+                            resultHtml += `
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="card h-100 shadow-sm">
+                                        <a href="#">
+                                            <img src="${item.File.replace("~", "")}" class="card-img-top" alt="Book Image" style="height: 250px; object-fit: cover;">
+                                        </a>
+                                        <div class="card-body">
+                                            <h5 class="card-title">${item.Name}</h5>
+                                            <p class="card-text">Author: ${item.Author}</p>
+                                            <p class="card-text">Language: ${item.Language}</p>
+                                            <p class="card-text"><small class="text-muted">Date: ${addDate}</small></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                    } else {
+                        resultHtml = '<div class="col-12"><div class="alert alert-info">No books found matching your search.</div></div>';
+                    }
+
+                    $('#searchResults').html(resultHtml);
+                } else {
+                    alert(response.message || 'No results found');
+                }
+            },
+            error: function () {
+                $('#searchBtn').html('Search'); // Reset button text
+                alert('An error occurred during search. Please try again.');
+            }
+        });
+    });
+
+    // Optional: Add a way to clear search and show original content
+    $('#bookName').on('input', function() {
+        if ($(this).val().trim() === '') {
+            $('#searchResultSection').hide();
+            $('#BeforeResult').show();
+        }
+    });
+});
+</script>
